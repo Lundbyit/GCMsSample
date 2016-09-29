@@ -3,6 +3,7 @@ using Android.Widget;
 using Android.OS;
 using Android.Gms.Common;
 using Android.Util;
+using Android.Content;
 
 namespace ClientApp
 {
@@ -17,7 +18,12 @@ namespace ClientApp
             SetContentView(Resource.Layout.Main);
             msgText = FindViewById<TextView>(Resource.Id.msgText);
 
-            IsPlayServicesAvailable();
+            if (IsPlayServicesAvailable())
+            {
+                var intent = new Intent(this, typeof(RegistrationIntentService));
+                StartService(intent);
+
+            }
         }
     
         public bool IsPlayServicesAvailable()
